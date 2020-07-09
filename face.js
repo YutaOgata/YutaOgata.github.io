@@ -6,7 +6,7 @@ $(function() {
 
     $('input[type=file]').change(function() {
 
-        var subscriptionKey = "c28f6833-40aa-472b-9365-c1abf0ea036d";
+        var subscriptionKey = "6dc6fe85f776423d9760478ebf82b5a9";
 
         var uriBase = "https://facesample-yutaogata.cognitiveservices.azure.com/";
 
