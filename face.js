@@ -8,7 +8,7 @@ $(function() {
 
         var subscriptionKey = "6dc6fe85f776423d9760478ebf82b5a9";
 
-        var uriBase = "https://facesample-yutaogata.cognitiveservices.azure.com/";
+        var uriBase = "https://facesample-yutaogata.cognitiveservices.azure.com/face/v1.0/detect";
 
         var params = {
             "returnFaceId": "true",
