@@ -29,7 +29,7 @@
   var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
 
  //6面分のテクスチャー読み込み
- var materials = new THREE.MeshLambertMaterial({ color: 0xff69b4 });
+ var material = new THREE.MeshLambertMaterial({ color: 0xff69b4 });
 
   // 箱を作成
   var geometry = new THREE.ParametricGeometry(function(u,v,target){
