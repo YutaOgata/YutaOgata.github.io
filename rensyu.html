@@ -66,75 +66,12 @@
             const ambientLight = new THREE.AmbientLight(0x999999);
             scene.add(ambientLight);
             
-            const bodypink = new THREE.Mesh(
+            const pink = new THREE.Mesh(
                 new THREE.SphereGeometry(300,40,40), // 球体
                 bodymaterial
             );
-            bodypink.position.set(0, 0, 0); //(x,y,z)
+            pink.position.set(0, 0, 0); //(x,y,z)
             
-            const eyeleft = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 35 * Math.sin(u) * Math.cos(v);
-                    var y = 70 * Math.sin(u) * Math.sin(v); 
-                    var z = 30 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                eyematerial
-            );
-            eyeleft.position.set(-60, 20, 280); //(x,y,z)
-            
-            const eyeright = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 35 * Math.sin(u) * Math.cos(v);
-                    var y = 70 * Math.sin(u) * Math.sin(v); 
-                    var z = 33 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                eyematerial
-            );
-            eyeright.position.set(60, 20, 280); //(x,y,z)
-            
-            const eyeleftb = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 33 * Math.sin(u) * Math.cos(v);
-                    var y = 60 * Math.sin(u) * Math.sin(v); 
-                    var z = 30 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                eyebmaterial
-            );
-            eyeleftb.position.set(-60, 25, 284); //(x,y,z)
-            
-            const eyerightb = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 33 * Math.sin(u) * Math.cos(v);
-                    var y = 60 * Math.sin(u) * Math.sin(v); 
-                    var z = 33 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                eyebmaterial
-            );
-            eyerightb.position.set(60, 25, 284); //(x,y,z)
-            
-            const eyeleftw = new THREE.Mesh(
-                new THREE.SphereGeometry(30,40,40), // 球体
-                eyewmaterial
-            );
-            eyeleftw.position.set(-60, 38, 287); //(x,y,z)
-            
-            const eyerightw = new THREE.Mesh(
-                new THREE.SphereGeometry(31.5,40,40), // 球体
-                eyewmaterial
-            );
-            eyerightw.position.set(60, 38, 287); //(x,y,z)
             
             const handleft = new THREE.Mesh(
                 new THREE.ParametricGeometry(function(u,v,target){
@@ -162,37 +99,6 @@
             );
             handright.position.set(280, 0, -30); //(x,y,z)
             
-            const cheakleft = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 65 * Math.sin(u) * Math.cos(v);
-                    var y = 25 * Math.sin(u) * Math.sin(v); 
-                    var z = 30 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                cheakmaterial
-            );
-            cheakleft.position.set(-100, -60, 250); //(x,y,z)
-            
-            const cheakright = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 65 * Math.sin(u) * Math.cos(v);
-                    var y = 25 * Math.sin(u) * Math.sin(v); 
-                    var z = 30 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                cheakmaterial
-            );
-            cheakright.position.set(100, -60, 250); //(x,y,z)
-            
-            const mouth = new THREE.Mesh(
-                new THREE.SphereGeometry(145,40,40), // 球体
-                legmaterial
-            );
-            mouth.position.set(0, -80, 145); //(x,y,z)
             
             const legleft = new THREE.Mesh(
                 new THREE.ParametricGeometry(function(u,v,target){
