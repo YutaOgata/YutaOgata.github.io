@@ -49,7 +49,7 @@
             scene.add(container);
             
             // マテリアルを作成
-            const bodymaterial = new THREE.MeshLambertMaterial({ color: 0xff69b4 })
+            const bodymaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("kirby.jpg")})
             const handmaterial = new THREE.MeshLambertMaterial({ color: 0xff69b4 })
             const eyematerial = new THREE.MeshPhongMaterial({ color: 0x0000ac })
             const eyebmaterial = new THREE.MeshPhongMaterial({ color: 0x000000 })
