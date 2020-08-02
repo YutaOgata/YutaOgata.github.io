@@ -36,20 +36,19 @@
         const meteo = new THREE.Group();
         scene.add(meteo);
         const meteogeometry = new THREE.SphereGeometry(20,20,20);
-        const meteomaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("iwa.jpg")})
+        const meteomaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("magma.png")})
 
         const meteomesh = new THREE.Mesh(meteogeometry,meteomaterial);
         meteomesh.position.z = -10;
-
         meteo.add(meteomesh);
 
         // グループを作成
-        const group = new THREE.Group();
-        scene.add(group);
+        const group1 = new THREE.Group();
+        scene.add(group1);
         const geometry = new THREE.SphereGeometry(15, 15, 10);
         const material = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("iwa.jpg")})
 
-        for (let i = 0; i < 5000; i++) {
+        for (let i = 0; i < 1000; i++) {
           const mesh = new THREE.Mesh(geometry, material);
           mesh.position.x = (Math.random() - 0.5) * 2000;
           mesh.position.y = (Math.random() - 0.5) * 2000;
@@ -58,7 +57,39 @@
           mesh.rotation.y = Math.random() * 2 * Math.PI;
           mesh.rotation.z = Math.random() * 2 * Math.PI;
           // グループに格納する
-          group.add(mesh);
+          group1.add(mesh);
+        }
+
+        // グループを作成
+        const group2 = new THREE.Group();
+        scene.add(group2);
+
+        for (let i = 0; i < 1000; i++) {
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.x = (Math.random() - 0.5) * 2000;
+          mesh.position.y = (Math.random() - 0.5) * 2000;
+          mesh.position.z = (Math.random() - 0.5) * 2000;
+          mesh.rotation.x = Math.random() * 2 * Math.PI;
+          mesh.rotation.y = Math.random() * 2 * Math.PI;
+          mesh.rotation.z = Math.random() * 2 * Math.PI;
+          // グループに格納する
+          group2.add(mesh);
+        }
+
+        // グループを作成
+        const group3 = new THREE.Group();
+        scene.add(group3);
+
+        for (let i = 0; i < 1000; i++) {
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.x = (Math.random() - 0.5) * 2000;
+          mesh.position.y = (Math.random() - 0.5) * 2000;
+          mesh.position.z = (Math.random() - 0.5) * 2000;
+          mesh.rotation.x = Math.random() * 2 * Math.PI;
+          mesh.rotation.y = Math.random() * 2 * Math.PI;
+          mesh.rotation.z = Math.random() * 2 * Math.PI;
+          // グループに格納する
+          group3.add(mesh);
         }
 
      
@@ -78,7 +109,9 @@
         // 毎フレーム時に実行されるループイベントです
         function tick() {
           // レンダリング
-          group.rotateY(0.01);
+          group1.rotateY(0.01);
+          group2.rotateX(0.01);
+          group3.rotateY(0.05);
           meteo.position.z += 1;
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
