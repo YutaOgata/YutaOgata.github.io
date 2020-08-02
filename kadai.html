@@ -33,13 +33,15 @@
         const controls = new THREE.OrbitControls(camera);
         controls.autoRotate = true;
 
-        var meteogeometry = new THREE.SphereGeometry(20,20,20);
-        var meteomaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("iwa.jpg")})
+        const meteo = new THREE.Group();
+        scene.add(meteo);
+        const meteogeometry = new THREE.SphereGeometry(20,20,20);
+        const meteomaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("iwa.jpg")})
 
-        var meteomesh = new THREE.Mesh(meteogeometry,meteomaterial);
+        const meteomesh = new THREE.Mesh(meteogeometry,meteomaterial);
         meteomesh.position.z = -10;
 
-        scene.add(meteomesh);
+        meteo.add(meteomesh);
 
         // グループを作成
         const group = new THREE.Group();
@@ -77,7 +79,7 @@
         function tick() {
           // レンダリング
           group.rotateY(0.01);
-          meteomesh.position.z += 0.1;
+          meteo.position.z += 1;
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
