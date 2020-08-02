@@ -132,6 +132,13 @@
           group4.rotateX(-0.01);
           group4.rotateY(-0.01);
           meteo.position.z += 1;
+          if(meteo.position.z == 100){
+            const meteomesh = new THREE.Mesh(meteogeometry,meteomaterial);
+        meteomesh.position.z = -10;
+        meteomesh.position.y = Math.random() - 0.5;
+        meteomesh.position.x = Math.random() - 0.5;
+        meteo.add(meteomesh);
+          }
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
