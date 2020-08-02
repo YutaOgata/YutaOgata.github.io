@@ -79,7 +79,7 @@
         function tick() {
           // レンダリング
           group.rotateY(0.01);
-          meteo.position.z += 0.01;
+          meteo.position.z += 0.1;
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
