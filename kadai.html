@@ -92,6 +92,22 @@
           group3.add(mesh);
         }
 
+        // グループを作成
+        const group4 = new THREE.Group();
+        scene.add(group4);
+
+        for (let i = 0; i < 1000; i++) {
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.x = (Math.random() - 0.5) * 2000;
+          mesh.position.y = (Math.random() - 0.5) * 2000;
+          mesh.position.z = (Math.random() - 0.5) * 2000;
+          mesh.rotation.x = Math.random() * 2 * Math.PI;
+          mesh.rotation.y = Math.random() * 2 * Math.PI;
+          mesh.rotation.z = Math.random() * 2 * Math.PI;
+          // グループに格納する
+          group4.add(mesh);
+        }
+
      
       　 // 光源（環境光）
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
@@ -113,6 +129,8 @@
           group2.rotateX(0.01);
           group2.rotateY(0.01);
           group3.rotateY(0.015);
+          group4.rotateX(-0.01);
+          group4.rotateY(-0.01);
           meteo.position.z += 1;
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
