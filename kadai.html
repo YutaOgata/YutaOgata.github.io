@@ -1,150 +1,92 @@
-<!DOCTYPE html>
-<html lang="ja">
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('load', init);
 
-<head>
-    <meta charset="utf-8">
-    <title>カービィ</title>
-</head>
-  
-<body>
-    <style>
-        body {
-            margin: 0;
-        }
-    </style>
-  <canvas id="threejs"></canvas>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script><!--three.min.jsを読み込む-->
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
 
-<script>
-        // ページの読み込みを待つ
-        window.addEventListener('load', init);
-        function init() {
-            // サイズを指定
-            const width = 960;
-            const height = 420;
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas')
+        });
+        renderer.setSize(width, height);
 
-            // レンダラーを作成
-            const renderer = new THREE.WebGLRenderer({
-                canvas: document.querySelector('#threejs')
-            });
-            renderer.setSize(width, height);
-            // 背景色
-            renderer.setClearColor(0xffffff);
-            
-            // シーンを作成
-            const scene = new THREE.Scene();
-            
-            // カメラを作成
-            const camera = new THREE.PerspectiveCamera(
-                45,
-                width / height,
-                1,
-                10000
-            );
-            camera.position.set(0, 0, 1400);
-            camera.lookAt(new THREE.Vector3(0, 0, 0));
-            // カメラコントローラーを作成
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // フォグを設定
+        scene.fog = new THREE.Fog(0x000000, 50, 2000);
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        // カメラの初期座標を設定
+        camera.position.set(0, 0, 1000);
+
+        // カメラコントローラーを作成
         const controls = new THREE.OrbitControls(camera);
-            
-            // コンテナーを作成
-            const container = new THREE.Object3D();
-            scene.add(container);
-            
-            // マテリアルを作成
-            const bodymaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("7607.png")})
-            const handmaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("hand.png")})
-            const eyematerial = new THREE.MeshPhongMaterial({ color: 0x0000ac })
-            const eyebmaterial = new THREE.MeshPhongMaterial({ color: 0x000000 })
-            const eyewmaterial = new THREE.MeshPhongMaterial({ color: 0xffffff })
-            const cheakmaterial = new THREE.MeshPhongMaterial({ color: 0xff4583 })
-            const legmaterial = new THREE.MeshLambertMaterial({ color: 0xff0011 })
-            
-            // 平行光源を作成
-            const directionalLight = new THREE.DirectionalLight(0xffffff);
-            directionalLight.position.set(1, 1, 1);
-            scene.add(directionalLight);
-            
-            // 環境光を作成
-            const ambientLight = new THREE.AmbientLight(0x999999);
-            scene.add(ambientLight);
-            
-            const pink = new THREE.Mesh(
-                new THREE.SphereGeometry(300,40,40), // 球体
-                bodymaterial
-            );
-            pink.position.set(0, 0, 0); //(x,y,z)
-            
-            
-            const handleft = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 150 * Math.sin(u) * Math.cos(v);
-                    var y = 75 * Math.sin(u) * Math.sin(v); 
-                    var z = 75 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                handmaterial
-            );
-            handleft.position.set(-280, 0, -30); //(x,y,z)
-            
-            const handright = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 150 * Math.sin(u) * Math.cos(v);
-                    var y = 75 * Math.sin(u) * Math.sin(v); 
-                    var z = 75 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                handmaterial
-            );
-            handright.position.set(280, 0, -30); //(x,y,z)
-            
-            
-            const legleft = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 120 * Math.sin(u) * Math.cos(v);
-                    var y = 55 * Math.sin(u) * Math.sin(v); 
-                    var z = 225 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                legmaterial
-            );
-            legleft.position.set(-150, -300, 70); //(x,y,z)
-            
-            const legright = new THREE.Mesh(
-                new THREE.ParametricGeometry(function(u,v,target){
-                    u = u * Math.PI;
-                    v = v * 2 * Math.PI;
-                    var x = 120 * Math.sin(u) * Math.cos(v);
-                    var y = 55 * Math.sin(u) * Math.sin(v); 
-                    var z = 225 * Math.cos(u);
-                    target.set( x, y, z );
-                }, 64, 64, true),
-                legmaterial
-            );
-            legright.position.set(150, -300, 70); //(x,y,z)
-          
-            
-            const ball = new THREE.Group(); //メッシュをグループ化
-            ball.add(pink,handleft,handright,legleft,legright);
-            scene.add(ball);
-            container.add(ball);
-            
-            tick();
-            
-            // 毎フレーム時に実行されるループイベント
-            function tick() {
-                // メッシュを回転させる
-               
-                // レンダリング
-                renderer.render(scene, camera);
-                requestAnimationFrame(tick);
-            }
+        controls.autoRotate = true;
+
+        const meteo = new THREE.Group();
+        scene.add(meteo);
+        const meteogeometry = new THREE.SphereGeometry(20,20,20);
+        const meteomaterial = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("iwa.jpg")})
+
+        const meteomesh = new THREE.Mesh(meteogeometry,meteomaterial);
+        meteomesh.position.z = -10;
+
+        meteo.add(meteomesh);
+
+        // グループを作成
+        const group = new THREE.Group();
+        scene.add(group);
+        const geometry = new THREE.SphereGeometry(15, 15, 10);
+        const material = new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("iwa.jpg")})
+
+        for (let i = 0; i < 5000; i++) {
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.x = (Math.random() - 0.5) * 2000;
+          mesh.position.y = (Math.random() - 0.5) * 2000;
+          mesh.position.z = (Math.random() - 0.5) * 2000;
+          mesh.rotation.x = Math.random() * 2 * Math.PI;
+          mesh.rotation.y = Math.random() * 2 * Math.PI;
+          mesh.rotation.z = Math.random() * 2 * Math.PI;
+          // グループに格納する
+          group.add(mesh);
         }
+
+     
+      　 // 光源（環境光）
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        scene.add(ambientLight);
+
+        // 平行光源
+        var directionalLight1 = new THREE.DirectionalLight(0xffffff,0.5);
+        directionalLight1.position.set(1000, 1000, 700);
+        // シーンに追加
+        scene.add(directionalLight1);
+        
+
+        tick();
+
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          // レンダリング
+          group.rotateY(0.01);
+          meteo.position.z += 0.1;
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
+      }
     </script>
-</body>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
 </html>
