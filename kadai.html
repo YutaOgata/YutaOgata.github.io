@@ -132,6 +132,11 @@
           group4.rotateX(-0.01);
           group4.rotateY(-0.01);
           meteo.position.z += 1;
+          if(meteo.positon.z == 100){
+            meteo.position.z = -10;
+            meteo.posision.x = Math.random() - 0.5;
+            meteo.position.y = Math.random() - 0.5;
+          }
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
